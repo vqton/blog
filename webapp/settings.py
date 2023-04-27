@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "contactus",
+    "aboutus",
     "registration",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -127,9 +130,29 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.mail.yahoo.com"
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'vuquangton@ymail.com'
-EMAIL_HOST_PASSWORD = 'opwwbhgpvoxrqxyl'
+EMAIL_HOST_USER = "vuquangton@ymail.com"
+EMAIL_HOST_PASSWORD = "opwwbhgpvoxrqxyl"
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
+
+CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, "uploads/")
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Basic',
+        'height': 300,
+        'width': 900,
+    },
+}
+
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
