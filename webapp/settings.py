@@ -127,10 +127,9 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.zoho.com"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.yahoo.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = "vuquangton@zohomail.com"
-EMAIL_HOST_PASSWORD = "bZWNSWky91Qs"
+EMAIL_HOST_USER = 'vuquangton@ymail.com'
+EMAIL_HOST_PASSWORD = 'opwwbhgpvoxrqxyl'
