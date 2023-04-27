@@ -1,0 +1,20 @@
+# Django related files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+
+# Static files
+/staticfiles/
+/static/
+
+# Media files
+/media/
+
+# Ignore all compiled files
+*.pyc
+
+# Ignore the virtual environment directory
+venv/
