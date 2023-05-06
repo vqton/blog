@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     "taggit",
     "aboutus",
     "blog",
+    "django_social_share",
+    "django_extensions",
     "registration",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,14 +149,13 @@ MEDIA_URL = "/media/"
 CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
 CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, "uploads/")
 CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Basic',
-        'height': 300,
-        'width': 900,
+    "default": {
+        "toolbar": "Basic",
+        "height": 300,
+        "width": 900,
     },
 }
 
 
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]

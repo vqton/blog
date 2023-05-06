@@ -19,6 +19,7 @@ from django.urls import path, include
 from registration import views
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("blog.urls"), name="home"),
@@ -26,11 +27,12 @@ urlpatterns = [
         "contact/",
         include("contactus.urls"),
     ),
-     path(
+    path(
         "aboutus/",
         include("aboutus.urls"),
     ),
     path("signup/", views.signup, name="signup"),
+ 
 ]
 
 

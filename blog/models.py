@@ -27,3 +27,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post", kwargs={"slug": self.slug})
+
+    def get_share_url(self, provider):
+        url = self.get_absolute_url()
+        if provider == 'facebook':
+            return f'https://www.facebook.com/sharer/sharer.php?u={url}'
+        elif provider == 'twitter':
+            return f'https://twitter.com/intent/tweet?url={url}'
+        elif provider == 'linkedin':
+            return f'https://www.linkedin.com/shareArticle?url={url}'
+        else:
+            return url

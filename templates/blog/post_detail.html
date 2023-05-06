@@ -1,22 +1,18 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>{{ object.title }}</h1>
-  <p>{{ object.content }}</p>
-
-  <div>
-    {% if object.image %}
-      <img src="{{ object.image.url }}" alt="{{ object.title }}">
-    {% endif %}
-  </div>
-
-  <div>
-    {% for tag in object.tags.all %}
-      <a href="{% url 'tagged_posts' tag.slug %}">{{ tag.name }}</a>
-    {% endfor %}
-  </div>
-
-  <div>
-    <p>Posted: {{ object.date_posted }}</p>
-  </div>
+  {% autoescape off %}
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <div>
+      {% if post.image %}<img src="{{ post.image.url }}" alt="{{ post.title }}">{% endif %}
+    </div>
+    <div>
+      {% for tag in post.tags.all %}
+        <a href="{% url 'tagged_posts' tag.slug %}">#{{ tag.name }}</a>
+      {% endfor %}
+    </div>
+    <div>
+      <p>Posted: {{ post.date_posted |timesince }}</p>
+    </div>
+  {% endautoescape %}
 {% endblock %}
