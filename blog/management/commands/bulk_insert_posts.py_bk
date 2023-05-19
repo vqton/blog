@@ -1,0 +1,95 @@
+# myapp/management/commands/bulk_insert_posts.py
+
+import json
+from django.core.management.base import BaseCommand
+from blog.models import Post
+from taggit.models import Tag
+from django.core.files.uploadedfile import SimpleUploadedFile
+
+class Command(BaseCommand):
+    help = 'Bulk insert posts from a JSON file'
+    
+    def create_tags(tags_data):
+        # Parse the tags data as a list of tags
+        tags_list = json.loads(tags_data)
+
+        # Create or retrieve existing tags based on the provided data
+        tags = []
+        for tag_name in tags_list:
+            tag, _ = Tag.objects.get_or_create(name=tag_name)
+            tags.append(tag)
+
+        return tags
+    
+    def save_image_file(image_file_path):
+        # Open and read the image file
+        with open(image_file_path, 'rb') as f:
+            image_data = f.read()
+
+        # Extract the image file name from the path
+        image_name = image_file_path.split('/')[-1]
+
+        # Create a SimpleUploadedFile object
+        image_file = SimpleUploadedFile(image_name, image_data)
+
+        # Save the image file and return the file path
+        image_path = 'blog/images/{}'.format(image_name)  # Adjust the path as needed
+        with open(image_path, 'wb') as f:
+            f.write(image_file.read())
+
+        return image_path
+    
+    def bulk_insert_posts(file_data):
+        try:
+            post_data = json.loads(file_data)
+
+            for data in post_data:
+                # Extract image file data
+                image_file_path = data.pop('image', None)
+                image = None
+
+                if image_file_path:
+                    image = self.save_image_file(image_file_path)
+
+                # Extract tags data
+                tags_data = data.pop('tags', None)
+                tags = None
+
+                if tags_data:
+                    tags = self.create_tags(tags_data)
+
+                # Create a new Post object
+                post = Post(**data)
+
+                if image:
+                    post.image = image
+
+                if tags:
+                    post.tags.set(*tags)
+
+                # Save the Post object
+                post.save()
+        except json.JSONDecodeError:
+            raise Exception('Invalid JSON data')
+
+    
+    
+    def add_arguments(self, parser):
+        parser.add_argument('file_path', type=str, help='Path to the JSON file')
+
+
+    def handle(self, *args, **options):
+        file_path = options['file_path']
+
+        with open(file_path) as f:
+            data = json.load(f)
+            
+
+        # for post_data in data:
+        #     post = Post(title=post_data['title'], content=post_data['content'], image=post_data['image'])
+        #     post.save()
+        #     # Add other fields like tags, image, etc. as per your data structure
+        bulk_insert_posts(data)
+        self.stdout.write(self.style.SUCCESS('Successfully inserted posts.'))
+
+
