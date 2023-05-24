@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load comments %}
 {% block content %}
   {% autoescape off %}
     <h1>{{ post.title }}</h1>
@@ -11,8 +12,13 @@
         <a href="{% url 'tagged_posts' tag.slug %}">#{{ tag.name }}</a>
       {% endfor %}
     </div>
+    {% endautoescape %}
     <div>
       <p>Posted: {{ post.date_posted |timesince }}</p>
-    </div>
-  {% endautoescape %}
+      {% get_comment_count for blog.post object_pk as comment_count %}
+      <p>{{ comment_count }} {% trans "comments have been posted." %} </p>
+      {% render_comment_form for post %}
+    
+  </div>
+
 {% endblock %}

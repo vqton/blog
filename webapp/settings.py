@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "blog",
     "django_social_share",
     "django_extensions",
+    "django.contrib.sites",
     "registration",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ckeditor",
+    "django_comments",
 ]
 
 MIDDLEWARE = [
