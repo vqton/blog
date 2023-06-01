@@ -2,7 +2,8 @@
 {% block content %}
    <h1 class="blog title">Genres: {{ tag.name }}</h1>
    {% for item in posts %}
-   <a href="{% url 'post_detail' item.id %}">{{ item.title|safe }}</a>
-   
+      <p>
+         <a href="{% url 'post_detail' item.id %}">{{ item.title|safe }}</a>
+      </p>
    {% endfor %}
 {% endblock %}

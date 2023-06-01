@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "registration",
     "django.contrib.admin",
     "django.contrib.auth",
+    "django.contrib.humanize",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+SITE_ID=1
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -159,5 +160,6 @@ CKEDITOR_CONFIGS = {
 }
 
 
-STATIC_URL = "/static/"
+
 STATICFILES_DIRS = [BASE_DIR / "static"]
+COMMENTS_APP = 'django_comments'

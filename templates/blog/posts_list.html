@@ -13,11 +13,11 @@
                 <h2 class="h2">{{ post.title |safe }}</h2>
                 <i>Published {{ post.date_posted|timesince }} ago</i>
                 {% if post.content|length > 100 %}
-                {{ post.content|safe|slice:":100" }}...
-                <a href="{% url 'post_detail' post_pk=post.pk %}">Read more</a>
-            {% else %}
-                {{ post.content|safe }}
-            {% endif %}
+                    {{ post.content|safe|slice:":100" }}...
+                    <a href="{% url 'post_detail' post_pk=post.pk %}">Read more</a>
+                {% else %}
+                    {{ post.content|safe }}
+                {% endif %}
             </br>
             Tags: <b>
             {% spaceless %}
